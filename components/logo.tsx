@@ -13,13 +13,12 @@ export function Logo() {
 
     const vfx = new VFX()
 
-    //  "uvGradient" | "rainbow" | "glitch" | "rgbGlitch" | "rgbShift" | "shine" | "blink" | "spring" | "duotone" | "tritone" | "hueShift" | "sinewave" | "pixelate" | "halftone" | "slitScanTransition" | "warpTransition" | "pixelateTransition" | "focusTransition";
     vfx.add(logo, { shader: 'rgbShift' })
   }, [])
 
   return (
-    <div ref={logoRef} className="relative w-full">
-      <Image src="/ship-ba-light.svg" alt="logo" width={700} height={120} />
+    <div ref={logoRef} className="relative w-full flex justify-center h-30">
+      <img src="/ship-ba-light.svg" alt="logo" className="w-full" />
     </div>
   )
 }
