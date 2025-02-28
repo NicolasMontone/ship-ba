@@ -144,11 +144,12 @@ export default function Home() {
 					</ul>
 				</div>
 			</div>
+
 			<div className="bg-dotted h-[45px] w-full my-20" />
 
 			{/* Judges Section */}
 			<div className="w-full flex flex-col items-start mt-32 mb-20">
-				<h2 className="font-mono text-3xl font-bold mb-8">Jueces</h2>
+				<h2 className="font-mono text-3xl font-bold mb-8" id="judges">Jueces</h2>
 				<p className="text-lg text-muted-foreground max-w-[800px] mb-12">
 					Van a encargarse de evaluar los proyectos y dar feedback. <br />
 					Los jueces son personas muy cracks con mucho recorrido en la industria y llevarte feedback de ellos puede ser lo más valioso de la hackathon.
@@ -174,8 +175,8 @@ export default function Home() {
 										<Image
 											src={judge.companyLogo}
 											alt={`${judge.name} company`}
-											width={120}
-											height={60}
+											width={130}
+											height={80}
 											className="object-contain mb-4"
 										/>
                     <p className="text-sm text-center text-white font-mono leading-relaxed max-w-[90%] bg-black/40 p-2 rounded">{judge.description}</p>
