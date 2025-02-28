@@ -35,48 +35,34 @@ export default function Home() {
           </div>
         </a>
       </div>
-      <div className="w-full flex flex-col items-start">
-        <h2 className="font-mono text-center text-md mb-4">Sponsors</h2>
-        <div className="w-full border border-white p-4 md:p-20">
-          <p className="text-center mb-8">
-            Tenemos a los más high level sponsors para hacer posible este evento
-          </p>
-
-          {/* Platinum Sponsor */}
-          <div className="mb-12">
-            <h3 className="font-mono text-center text-sm mb-6 border-b border-white pb-2">
-              Platinum Sponsor
-            </h3>
-            <div className="flex justify-center py-4 md:py-12">
+      <div className="w-full flex flex-col items-start mt-24">
+        <div className="flex justify-center w-full">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-32">
+            <div className="flex flex-col items-start gap-2">
               <a href="https://www.silver.dev">
                 <Image
                   src="/sponsor/silver.svg"
-                  alt="Silver Sponsor Logo"
-                  width={650}
-                  height={200}
+                  alt="Silver.dev - Platinum sponsor"
+                  width={300}
+                  height={120}
                   className="object-contain"
                   priority
                 />
               </a>
+              <p className="font-mono text-sm mb-4">Platinum sponsor</p>
             </div>
-          </div>
-
-          {/* Gold Sponsor */}
-          <div>
-            <h3 className="font-mono text-center text-sm mb-6 border-b border-white pb-2">
-              Gold Sponsor
-            </h3>
-            <div className="flex justify-center py-4 md:py-12">
+            <div className="flex flex-col items-start gap-2">
               <a href="https://vercel.com">
                 <Image
                   src="/sponsor/vercel.svg"
-                  alt="Vercel Sponsor Logo"
+                  alt="Vercel - Gold sponsor"
                   width={200}
-                  height={100}
+                  height={57}
                   className="object-contain"
                   priority
                 />
               </a>
+              <p className="font-mono text-sm mb-4">Gold sponsor</p>
             </div>
           </div>
         </div>
