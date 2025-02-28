@@ -18,7 +18,13 @@ export function Logo() {
 
   return (
     <div ref={logoRef} className="relative w-full flex justify-center h-30">
-      <img src="/ship-ba-light.svg" alt="logo" className="w-full" />
+      <Image
+        src="/ship-ba-light.svg"
+        alt="logo"
+        className="w-full"
+        width={600}
+        height={300}
+      />
     </div>
   )
 }

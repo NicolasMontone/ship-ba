@@ -1,4 +1,5 @@
 import { Logo } from '@/components/logo'
+import Image from 'next/image'
 
 export default function Home() {
   return (
@@ -81,6 +82,37 @@ export default function Home() {
               </p>
             </li>
           </ul>
+        </div>
+      </div>
+      <div className="bg-dotted h-[45px] w-full my-20" />
+      <div className="w-full flex flex-col items-start">
+        <h2 className="font-mono text-center text-md mb-4">Sponsors</h2>
+        <div className="w-full border border-white p-4 md:p-20">
+          <p className="text-center mb-8">
+            Tenemos a los más high level sponsors para hacer posible este evento
+          </p>
+          <div className="flex justify-center gap-4 items-center flex-col">
+            <a href="https://www.silver.dev">
+              <Image
+                src="/sponsor/silver.svg"
+                alt="Silver Sponsor Logo"
+                width={650}
+                height={200}
+                className="object-contain"
+                priority
+              />
+            </a>
+            <a href="https://vercel.com">
+              <Image
+                src="/sponsor/vercel.svg"
+                alt="Vercel Sponsor Logo"
+                width={200}
+                height={100}
+                className="object-contain"
+                priority
+              />
+            </a>
+          </div>
         </div>
       </div>
     </div>
