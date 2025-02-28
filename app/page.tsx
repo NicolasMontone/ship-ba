@@ -91,27 +91,39 @@ export default function Home() {
           <p className="text-center mb-8">
             Tenemos a los más high level sponsors para hacer posible este evento
           </p>
-          <div className="flex justify-center gap-4 items-center flex-col">
-            <a href="https://www.silver.dev">
-              <Image
-                src="/sponsor/silver.svg"
-                alt="Silver Sponsor Logo"
-                width={650}
-                height={200}
-                className="object-contain"
-                priority
-              />
-            </a>
-            <a href="https://vercel.com">
-              <Image
-                src="/sponsor/vercel.svg"
-                alt="Vercel Sponsor Logo"
-                width={200}
-                height={100}
-                className="object-contain"
-                priority
-              />
-            </a>
+          
+          {/* Platinum Sponsor */}
+          <div className="mb-12">
+            <h3 className="font-mono text-center text-sm mb-6 border-b border-white pb-2">Platinum Sponsor</h3>
+            <div className="flex justify-center">
+              <a href="https://www.silver.dev">
+                <Image
+                  src="/sponsor/silver.svg"
+                  alt="Silver Sponsor Logo"
+                  width={650}
+                  height={200}
+                  className="object-contain"
+                  priority
+                />
+              </a>
+            </div>
+          </div>
+          
+          {/* Gold Sponsor */}
+          <div>
+            <h3 className="font-mono text-center text-sm mb-6 border-b border-white pb-2">Gold Sponsor</h3>
+            <div className="flex justify-center">
+              <a href="https://vercel.com">
+                <Image
+                  src="/sponsor/vercel.svg"
+                  alt="Vercel Sponsor Logo"
+                  width={200}
+                  height={100}
+                  className="object-contain"
+                  priority
+                />
+              </a>
+            </div>
           </div>
         </div>
       </div>
