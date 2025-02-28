@@ -4,7 +4,7 @@ import Image from 'next/image'
 export default function Home() {
   return (
     <div className="mx-auto container p-4">
-      <div className="flex flex-col items-center gap-2 mt-20">
+      <div className="flex flex-col items-center gap-2 my-20">
         <div className="md:mt-40 flex justify-center">
           <Logo />
         </div>
@@ -35,6 +35,54 @@ export default function Home() {
           </div>
         </a>
       </div>
+      <div className="w-full flex flex-col items-start">
+        <h2 className="font-mono text-center text-md mb-4">Sponsors</h2>
+        <div className="w-full border border-white p-4 md:p-20">
+          <p className="text-center mb-8">
+            Tenemos a los más high level sponsors para hacer posible este evento
+          </p>
+
+          {/* Platinum Sponsor */}
+          <div className="mb-12">
+            <h3 className="font-mono text-center text-sm mb-6 border-b border-white pb-2">
+              Platinum Sponsor
+            </h3>
+            <div className="flex justify-center py-4 md:py-12">
+              <a href="https://www.silver.dev">
+                <Image
+                  src="/sponsor/silver.svg"
+                  alt="Silver Sponsor Logo"
+                  width={650}
+                  height={200}
+                  className="object-contain"
+                  priority
+                />
+              </a>
+            </div>
+          </div>
+
+          {/* Gold Sponsor */}
+          <div>
+            <h3 className="font-mono text-center text-sm mb-6 border-b border-white pb-2">
+              Gold Sponsor
+            </h3>
+            <div className="flex justify-center py-4 md:py-12">
+              <a href="https://vercel.com">
+                <Image
+                  src="/sponsor/vercel.svg"
+                  alt="Vercel Sponsor Logo"
+                  width={200}
+                  height={100}
+                  className="object-contain"
+                  priority
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="bg-dotted h-[45px] w-full my-20" />
+
       {/* <div className="bg-dotted h-[45px] w-full mt-20" /> */}
       <div className="w-full flex flex-col items-start mt-20">
         <h2 className="font-mono text-center text-md mb-4">Información</h2>
@@ -84,49 +132,18 @@ export default function Home() {
           </ul>
         </div>
       </div>
-      <div className="bg-dotted h-[45px] w-full my-20" />
-      <div className="w-full flex flex-col items-start">
-        <h2 className="font-mono text-center text-md mb-4">Sponsors</h2>
-        <div className="w-full border border-white p-4 md:p-20">
-          <p className="text-center mb-8">
-            Tenemos a los más high level sponsors para hacer posible este evento
-          </p>
-          
-          {/* Platinum Sponsor */}
-          <div className="mb-12">
-            <h3 className="font-mono text-center text-sm mb-6 border-b border-white pb-2">Platinum Sponsor</h3>
-            <div className="flex justify-center py-4 md:py-12">
-              <a href="https://www.silver.dev">
-                <Image
-                  src="/sponsor/silver.svg"
-                  alt="Silver Sponsor Logo"
-                  width={650}
-                  height={200}
-                  className="object-contain"
-                  priority
-                />
-              </a>
-            </div>
-          </div>
-          
-          {/* Gold Sponsor */}
-          <div>
-            <h3 className="font-mono text-center text-sm mb-6 border-b border-white pb-2">Gold Sponsor</h3>
-            <div className="flex justify-center py-4 md:py-12">
-              <a href="https://vercel.com">
-                <Image
-                  src="/sponsor/vercel.svg"
-                  alt="Vercel Sponsor Logo"
-                  width={200}
-                  height={100}
-                  className="object-contain"
-                  priority
-                />
-              </a>
-            </div>
-          </div>
+      <footer className="border-t-[1px] border-border px-4 md:px-6 pt-10 md:pt-16 bg-[#fff] dark:bg-[#0C0C0C] overflow-hidden h-[300px] md:h-[400px]">
+        <div className="-mb-20">
+          <Image
+            src="/ship-ba-gray.png"
+            alt="Ship BA Logo"
+            width={1200}
+            height={600}
+            className="w-full object-contain"
+            priority
+          />
         </div>
-      </div>
+      </footer>
     </div>
   )
 }
