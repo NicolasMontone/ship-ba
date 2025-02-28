@@ -132,7 +132,7 @@ export default function Home() {
           </ul>
         </div>
       </div>
-      <footer className="border-t-[1px] border-border px-4 md:px-6 pt-10 md:pt-16 bg-[#fff] dark:bg-[#0C0C0C] overflow-hidden h-[300px] md:h-[400px]">
+      <footer className="border-t-[1px] border-border px-4 md:px-6 pt-10 md:pt-16 bg-[#fff] dark:bg-[#0C0C0C] overflow-hidden h-[200px] md:h-[300px]">
         <div className="-mb-20">
           <Image
             src="/ship-ba-gray.png"
