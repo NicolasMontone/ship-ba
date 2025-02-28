@@ -95,7 +95,7 @@ export default function Home() {
           {/* Platinum Sponsor */}
           <div className="mb-12">
             <h3 className="font-mono text-center text-sm mb-6 border-b border-white pb-2">Platinum Sponsor</h3>
-            <div className="flex justify-center">
+            <div className="flex justify-center py-4 md:py-12">
               <a href="https://www.silver.dev">
                 <Image
                   src="/sponsor/silver.svg"
@@ -112,7 +112,7 @@ export default function Home() {
           {/* Gold Sponsor */}
           <div>
             <h3 className="font-mono text-center text-sm mb-6 border-b border-white pb-2">Gold Sponsor</h3>
-            <div className="flex justify-center">
+            <div className="flex justify-center py-4 md:py-12">
               <a href="https://vercel.com">
                 <Image
                   src="/sponsor/vercel.svg"
