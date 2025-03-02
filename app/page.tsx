@@ -1,6 +1,21 @@
-import { Logo } from '@/components/logo'
+import { Logo } from '@/components/logo';
+import { cn } from '@/lib/utils';
+import { desc } from 'framer-motion/client';
 
-import Image from 'next/image'
+import Image from 'next/image';
+
+type Person = {
+  name: string;
+  companyLogo: string | null;
+  image: string;
+  description: string;
+  link: `https://x.com/${string}` | `https://www.linkedin.com/in/${string}`;
+  imageSize?: {
+    width: number;
+    height: number;
+  };
+  companyLogoClassName?: string;
+};
 
 const judges = [
   {
@@ -8,14 +23,15 @@ const judges = [
     companyLogo: '/company/silver.svg',
     image: '/judge/gabriel.jpg',
     description:
-      'Staff Engineer con 15+ años de experiencia en startups como Robinhood y OpenSea. Founder de Silver.dev y host del podcast Tecnología Informal',
+      "Staff Engineer with 15+ years of experience in startups like Robinhood and OpenSea. Founder of Silver.dev and host of 'Tecnología Informal' podcast",
     link: 'https://x.com/Conanbatt',
   },
   {
     name: 'Fefo Miras',
     companyLogo: '/company/scale.png',
     image: '/judge/fefo.jpg',
-    description: 'Founder pluggy.ai (YC S21), hacker, gamer, investor, now Scale',
+    description:
+      'Founder pluggy.ai (YC S21), hacker, gamer, investor, now Scale',
     link: 'https://x.com/fefomiras',
   },
   {
@@ -51,7 +67,61 @@ const judges = [
     link: 'https://x.com/0xpili_',
     description: 'COO @ GraphOps',
   },
-]
+] satisfies Person[];
+
+const mentors = [
+  {
+    name: 'Marker Diaz Olmos',
+    description: 'Senior Software Engineer @ Pluggy.ai',
+    link: 'https://x.com/marcosdiazolmos',
+    companyLogo: null,
+    image: '/mentor/marker.jpg',
+  },
+  {
+    name: 'Goncy',
+    link: 'https://x.com/goncy',
+    image: '/mentor/goncy.jpg',
+    description: 'Senior Solutions Engineer ▲ Vercel, streamer',
+    companyLogo: '/sponsor/vercel.svg',
+  },
+  {
+    name: 'Lucas Janon',
+    link: 'https://x.com/LucasJanon',
+    image: '/mentor/janon.jpeg',
+    description:
+      'Founder @ Pulso, ex Founder designstripe, Head of Product Engineer ZetaChain',
+    companyLogo: '/company/pulso.avif',
+    companyLogoClassName: 'invert',
+  },
+  {
+    name: 'Esteban Canela',
+    image: '/mentor/cane.jpeg',
+    description: 'Ex tech lead @ Deel, Rebill & Pomelo',
+    companyLogo: null,
+    link: 'https://x.com/efcanela',
+  },
+  {
+    name: 'Pablo Fernandez',
+    image: '/mentor/pablo.jpg',
+    description: 'Streamer @ "ElSindicatoDelSoftware, coder"',
+    companyLogo: null,
+    link: 'https://x.com/fernandezpablo',
+  },
+  {
+    name: 'Nahuel Alberti',
+    description: 'Head of Engineering @Paisanos.io',
+    link: 'https://x.com/nays1_',
+    companyLogo: '/company/paisanos.jpeg',
+    image: '/mentor/nahue.jpeg',
+  },
+  {
+    name: 'Alva Echazú',
+    link: 'https://www.linkedin.com/in/alva-echaz%C3%BA-149a51162s',
+    description: 'Head of Product & UX en Paisanos.io | Inventor',
+    companyLogo: '/company/paisanos.jpeg',
+    image: '/mentor/alva.jpeg',
+  },
+] satisfies Person[];
 
 export default function Home() {
   return (
@@ -226,6 +296,64 @@ export default function Home() {
           ))}
         </div>
       </div>
+      {/* {' Mentors Section'} */}
+      <div className="w-full flex flex-col items-start mt-32 mb-20">
+        <h2 className="font-mono text-3xl font-bold mb-8" id="judges">
+          Mentores
+        </h2>
+        <p className="text-lg text-muted-foreground max-w-[800px] mb-12">
+          Ellos van a estar ahí para ayudarte a resolver dudas, para guiarte
+          durante el fin de semana y para que puedas avanzar más rápido.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+          {mentors.map((mentor) => (
+            <a
+              href={mentor.link}
+              target="_blank"
+              rel="noreferrer"
+              key={mentor.name}
+            >
+              <div className="relative overflow-hidden border border-white/20 group transition-all duration-300 hover:shadow-lg">
+                <div className="aspect-square relative">
+                  <Image
+                    src={mentor.image}
+                    alt={`${mentor.name} - Juez`}
+                    fill
+                    className="object-cover grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center p-4 backdrop-blur-sm">
+                    {mentor.companyLogo && (
+                      <Image
+                        src={mentor.companyLogo}
+                        alt={`${mentor.name} company`}
+                        width={130}
+                        height={80}
+                        className={cn(
+                          'object-contain mb-4 grayscale',
+                          mentor.companyLogoClassName
+                        )}
+                      />
+                    )}
+                    <p className="text-sm text-center text-white font-mono leading-relaxed max-w-[90%] bg-black/40 p-2 rounded">
+                      {mentor.description}
+                    </p>
+                  </div>
+                </div>
+                <div className="p-4 bg-black/80 absolute bottom-0 w-full transition-all duration-300 group-hover:bg-black/90">
+                  <h3 className="font-mono text-sm font-medium">
+                    {mentor.name}
+                  </h3>
+                  <p className="text-xs text-white/70 mt-1 line-clamp-2">
+                    {mentor.description}
+                  </p>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
       <footer className="border-t-[1px] border-border px-4 md:px-6 pt-10 md:pt-16 bg-[#fff] dark:bg-[#0C0C0C] overflow-hidden h-[200px] md:h-[300px]">
         <div className="-mb-20">
           <Image
@@ -239,5 +367,5 @@ export default function Home() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
