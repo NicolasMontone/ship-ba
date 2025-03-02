@@ -58,7 +58,7 @@ export default function Home() {
         </p>
 
         <a
-          href="https://forms.gle/bwhNofDrhXXJs2Kr8"
+          href="https://x.com/shipbahackathon"
           target="_blank"
           rel="noreferrer"
         >
@@ -75,7 +75,7 @@ export default function Home() {
               }}
               type="button"
             >
-              Inscribí a tu equipo
+              Mirá el evento en X
             </button>
           </div>
         </a>
