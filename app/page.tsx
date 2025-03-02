@@ -15,7 +15,7 @@ const judges = [
     name: 'Fefo Miras',
     companyLogo: '/company/scale.png',
     image: '/judge/fefo.jpg',
-    description: 'Founder pluggy.ai (YC S21), hacker, gamer, investor',
+    description: 'Founder pluggy.ai (YC S21), hacker, gamer, investor, now Scale',
     link: 'https://x.com/fefomiras',
   },
   {
@@ -43,6 +43,13 @@ const judges = [
     link: 'https://x.com/solettyy',
     description:
       'Co-founder & CTO of Klyra protocol, Co-founder Notebooklabs (YC S22), Stanford',
+  },
+  {
+    name: 'Pilar Rodríguez',
+    companyLogo: '/company/graphops.svg',
+    image: '/judge/pili.jpg',
+    link: 'https://x.com/0xpili_',
+    description: 'COO @ GraphOps',
   },
 ]
 
