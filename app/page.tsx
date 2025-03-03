@@ -89,7 +89,7 @@ const mentors = [
     link: 'https://x.com/LucasJanon',
     image: '/mentor/janon.jpeg',
     description:
-      'Founder @ Pulso, ex Founder designstripe, Head of Product Engineer ZetaChain',
+      'Founder @ pulso.health, Founder @ designstripe, ex Head of Product Engineering @ ZetaChain',
     companyLogo: '/company/pulso.avif',
     companyLogoClassName: 'invert',
   },
