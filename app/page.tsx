@@ -102,8 +102,8 @@ const mentors = [
   },
   {
     name: 'Pablo Fernandez',
-    image: '/mentor/pablo.jpg',
-    description: 'Streamer @ "ElSindicatoDelSoftware, coder"',
+    image: '/mentor/pablo.jpeg',
+    description: 'coder',
     companyLogo: null,
     link: 'https://x.com/fernandezpablo',
   },
