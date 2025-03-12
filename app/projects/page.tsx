@@ -21,8 +21,6 @@ import { cn } from '@/lib/utils';
 import { getProjectSlug } from '@/lib/get-projects-slug';
 import { Project, projectsBase } from '@/lib/projects';
 
-// Define the Project type
-
 // Function to convert video URLs to embed URLs
 function getEmbedUrl(url: string): string {
   // YouTube
