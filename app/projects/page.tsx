@@ -443,22 +443,6 @@ export default function ProjectsPage() {
                       alt={project.name}
                       className="object-contain w-full h-full p-2 max-h-20"
                     />
-                    <button
-                      className="absolute top-1 right-1 bg-black/70 p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                      onClick={(e) =>
-                        openImageModal(
-                          project.image || getProjectImage(project.name),
-                          project.name,
-                          e
-                        )
-                      }
-                    >
-                      <Maximize2
-                        className={`h-4 w-4 ${
-                          project.position ? 'text-white' : 'text-white'
-                        }`}
-                      />
-                    </button>
                   </div>
                 </div>
 

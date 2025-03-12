@@ -441,14 +441,6 @@ export default function ProjectPage() {
                       : 'border-zinc-800 bg-black'
                   }`}
                 >
-                  <p
-                    className={`mb-4 text-lg ${
-                      isWinner ? 'text-black/80' : 'text-gray-300'
-                    }`}
-                  >
-                    Los videos de Google Drive no se pueden embeber
-                    directamente.
-                  </p>
                   <Link
                     href={videoEmbedUrl as string}
                     target="_blank"

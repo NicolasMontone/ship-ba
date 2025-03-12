@@ -238,7 +238,7 @@ export const projectsBase: Project[] = [
 		name: 'Ardillapp',
 		productUrl: 'https://ardillapp.vercel.app/',
 		videoUrl:
-			'https://drive.google.com/file/d/1brhWkGA44LriTIfcsk2J0HP5GQoUTEbI/view?usp=sharing',
+			'https://drive.google.com/file/d/1c9XnJ2YqEXuXFKzkslDbVVXod53XVk-p/view',
 		githubUrl: 'https://github.com/julideangelis/ardillapp',
 		description: 'Stock and analysis for businesses',
 		spanishDescription: 'Stock y análisis para negocios. Controlá tu inventario y ventas sin volverte loco, ¡una maravilla!',
