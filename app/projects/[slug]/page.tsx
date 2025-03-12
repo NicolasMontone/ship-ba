@@ -108,7 +108,7 @@ function getWinnerClass(position: string) {
       return 'bg-gradient-to-br from-gray-500 via-gray-400 to-gray-600 border-gray-500 shadow-gray-900/30 text-white';
     case '3':
       // Bronze effect for 3rd place - darker gradient
-      return 'bg-gradient-to-br from-amber-800 via-amber-700 to-amber-900 border-amber-800 shadow-amber-900/30 text-white';
+      return 'bg-gradient-to-br from-amber-700 via-amber-500 to-amber-700 border-amber-500 shadow-amber-900/30 text-white';
     default:
       // Default styling for non-winners
       return 'bg-zinc-900 border-zinc-800';

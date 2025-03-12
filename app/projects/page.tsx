@@ -95,7 +95,7 @@ function getProjectImage(name: string): string {
 const spanishDescriptions: Record<string, string> = {
   Majorana:
     'Asistente para streamers de Twitch: Analiza los temas principales del chat, sentimiento y métricas ¡Una genialidad para tus directos, che!',
-  'Burro Speach':
+  'Burro Speech':
     'Traducción en vivo con inteligencia artificial para eventos, reuniones o talleres. ¡Habla tranqui que Burro lo traduce al toque!',
   U0: 'Generá personas ficticias para recibir feedback de tu producto con IA. ¡La mejor forma de poner a prueba tu idea, viste!',
   Wololo:
