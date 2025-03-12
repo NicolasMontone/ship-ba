@@ -6,11 +6,18 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:migration:generate": "npx drizzle-kit generate",
+    "db:migration:migrate": "npx drizzle-kit migrate",
+    "db:migrate": "bun run db:migration:generate && bun run db:migration:migrate"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.7",
+    "drizzle-kit": "^0.30.5",
+    "drizzle-orm": "^0.40.0",
     "framer-motion": "^12.0.6",
     "lucide-react": "^0.474.0",
     "next": "15.1.6",
@@ -18,7 +25,9 @@
     "react-dom": "^19.0.0",
     "react-vfx": "^0.11.0",
     "tailwind-merge": "^3.0.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "uuid": "^11.1.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/node": "^20",

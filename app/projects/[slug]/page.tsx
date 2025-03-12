@@ -14,10 +14,13 @@ import {
   Mail,
   ExternalLink,
   GithubIcon,
+  ChevronUp,
+  MessageSquare,
 } from 'lucide-react';
 import teamsData from '../../../teams.json';
 import { getProjectSlug } from '@/lib/get-projects-slug';
 import { projectsBase } from '@/lib/projects';
+import { cn } from '@/lib/utils';
 
 // We'll use this same function from the main page
 function getEmbedUrl(url: string): string {
@@ -122,8 +125,97 @@ export default function ProjectPage() {
   const [loading, setLoading] = useState(true);
   const [team, setTeam] = useState<any>(null);
 
+  // State for upvotes - store in a Map with project name as key
+  const [upvoteCounts, setUpvoteCounts] = useState<Map<string, number>>(
+    new Map()
+  );
+
+  // State for user upvotes
+  const [userUpvotes, setUserUpvotes] = useState<Set<string>>(new Set());
+
+  // State for comments
+  const [commentText, setCommentText] = useState('');
+
+  // Function to reset upvotes for this project
+  const resetProjectUpvotes = () => {
+    if (!project) return;
+
+    // Reset upvote count for this project
+    setUpvoteCounts(new Map([[project.name, 0]]));
+
+    // Remove from user upvotes if present
+    if (userUpvotes.has(project.name)) {
+      const newUpvotes = new Set(userUpvotes);
+      newUpvotes.delete(project.name);
+      setUserUpvotes(newUpvotes);
+      localStorage.setItem('userUpvotes', JSON.stringify([...newUpvotes]));
+    }
+
+    // Update localStorage
+    try {
+      const savedCounts = localStorage.getItem('upvoteCounts');
+      const allCounts = savedCounts ? JSON.parse(savedCounts) : {};
+      allCounts[project.name] = 0;
+      localStorage.setItem('upvoteCounts', JSON.stringify(allCounts));
+    } catch (error) {
+      console.error('Error updating localStorage:', error);
+    }
+  };
+
   // Always treat this as a modal
   const isModal = true;
+
+  // Function to handle upvote
+  const handleUpvote = (projectName: string, e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent default behavior
+    setUpvoteCounts((prev) => {
+      const newCounts = new Map(prev);
+      // If user already upvoted, remove upvote
+      if (userUpvotes.has(projectName)) {
+        newCounts.set(projectName, (prev.get(projectName) || 0) - 1);
+        setUserUpvotes((prev) => {
+          const newUpvotes = new Set(prev);
+          newUpvotes.delete(projectName);
+          // Save to localStorage
+          localStorage.setItem('userUpvotes', JSON.stringify([...newUpvotes]));
+          return newUpvotes;
+        });
+      } else {
+        // Otherwise add upvote
+        newCounts.set(projectName, (prev.get(projectName) || 0) + 1);
+        setUserUpvotes((prev) => {
+          const newUpvotes = new Set(prev);
+          newUpvotes.add(projectName);
+          // Save to localStorage
+          localStorage.setItem('userUpvotes', JSON.stringify([...newUpvotes]));
+          return newUpvotes;
+        });
+      }
+
+      // Save upvote counts to localStorage
+      // Get existing counts first
+      let allCounts = {};
+      try {
+        const savedCounts = localStorage.getItem('upvoteCounts');
+        if (savedCounts) {
+          allCounts = JSON.parse(savedCounts);
+        }
+      } catch (error) {
+        console.error('Error reading upvote counts:', error);
+      }
+
+      // Update with new count
+      allCounts = {
+        ...allCounts,
+        [projectName]: newCounts.get(projectName),
+      };
+
+      // Save back to localStorage
+      localStorage.setItem('upvoteCounts', JSON.stringify(allCounts));
+
+      return newCounts;
+    });
+  };
 
   // Fetch project data based on slug
   useEffect(() => {
@@ -141,9 +233,45 @@ export default function ProjectPage() {
       };
       setProject(updatedProject);
 
+      // Initialize upvote count for this project
+      setUpvoteCounts(new Map([[updatedProject.name, 0]]));
+
       // Find team information
       const teamInfo = findTeamForProject(updatedProject.name);
       setTeam(teamInfo);
+
+      // Load upvotes from localStorage
+      try {
+        // Load user upvotes
+        const savedUpvotes = localStorage.getItem('userUpvotes');
+        if (savedUpvotes) {
+          setUserUpvotes(new Set(JSON.parse(savedUpvotes)));
+        }
+
+        // Load upvote counts
+        const savedCounts = localStorage.getItem('upvoteCounts');
+        if (savedCounts) {
+          const parsedCounts = JSON.parse(savedCounts);
+          if (parsedCounts[updatedProject.name] !== undefined) {
+            setUpvoteCounts(
+              new Map([
+                [updatedProject.name, parsedCounts[updatedProject.name]],
+              ])
+            );
+          } else {
+            // If this project doesn't have saved counts, initialize with zero
+            const allCounts = JSON.parse(savedCounts || '{}');
+            allCounts[updatedProject.name] = 0;
+            localStorage.setItem('upvoteCounts', JSON.stringify(allCounts));
+          }
+        } else {
+          // If no saved counts at all, initialize this project with zero
+          const initialCounts = { [updatedProject.name]: 0 };
+          localStorage.setItem('upvoteCounts', JSON.stringify(initialCounts));
+        }
+      } catch (error) {
+        console.error('Error loading upvotes from localStorage:', error);
+      }
     }
     setLoading(false);
   }, [params.slug]);
@@ -227,13 +355,18 @@ export default function ProjectPage() {
         <div className="flex items-center">
           <h1
             className={`text-2xl font-bold ${
-              isWinner ? 'text-white' : 'text-white'
+              isWinner ? 'text-black' : 'text-white'
             }`}
           >
             {project.name}
           </h1>
           {project.position && (
-            <div className="flex items-center ml-2 text-white">
+            <div
+              className={cn(
+                'flex items-center ml-2 text-white',
+                isWinner ? 'text-black' : 'text-white'
+              )}
+            >
               <Trophy className="h-5 w-5 mr-1" />
               <span className="font-bold text-sm">{project.position}º</span>
             </div>
@@ -538,6 +671,172 @@ export default function ProjectPage() {
               </div>
             </div>
           )}
+        </div>
+
+        {/* Upvotes and Comments Section */}
+        <div className="mt-8 border-t pt-6 space-y-6">
+          {/* Upvotes */}
+          <div className="flex items-center">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                // We'll reuse the same upvote logic from the main page
+                handleUpvote(project.name, e);
+              }}
+              className={`flex items-center group ${
+                isWinner ? 'text-black' : 'text-white'
+              }`}
+            >
+              <ChevronUp
+                className={`h-6 w-6 mr-2 ${
+                  userUpvotes.has(project.name)
+                    ? isWinner
+                      ? 'text-black'
+                      : 'text-white'
+                    : isWinner
+                    ? 'text-black/70 group-hover:text-black'
+                    : 'text-gray-400 group-hover:text-white'
+                }`}
+              />
+              <span className="text-sm font-medium">
+                {upvoteCounts.get(project.name) || 0} Upvotes
+              </span>
+            </button>
+          </div>
+
+          {/* Comments Section */}
+          <div>
+            <h2
+              className={`text-lg font-semibold mb-4 flex items-center ${
+                isWinner ? 'text-black' : 'text-white'
+              }`}
+            >
+              <MessageSquare className="h-5 w-5 mr-2" />
+              Comentarios ({project.comments || 0})
+            </h2>
+
+            {/* Comment Form */}
+            <div
+              className={`mb-6 p-4 rounded-lg border ${
+                isWinner
+                  ? 'bg-black/10 border-black/20'
+                  : 'bg-zinc-900 border-zinc-800'
+              }`}
+            >
+              <textarea
+                placeholder="Dejá tu comentario..."
+                className={`w-full p-3 rounded-lg mb-3 bg-black/20 border ${
+                  isWinner
+                    ? 'border-black/20 text-black'
+                    : 'border-zinc-700 text-white'
+                } placeholder-gray-500`}
+                rows={3}
+                value={commentText}
+                onChange={(e) => setCommentText(e.target.value)}
+              ></textarea>
+              <button
+                className={`px-4 py-2 rounded-lg font-medium ${
+                  isWinner
+                    ? 'bg-black text-white hover:bg-black/80'
+                    : 'bg-white text-black hover:bg-gray-200'
+                } transition-colors`}
+                onClick={() => {
+                  if (commentText.trim()) {
+                    // In a real app, we would save the comment to a database
+                    // For now, we'll just clear the input
+                    setCommentText('');
+                    // Optionally increment the comment count
+                    setProject({
+                      ...project,
+                      comments: (project.comments || 0) + 1,
+                    });
+                  }
+                }}
+              >
+                Comentar
+              </button>
+            </div>
+
+            {/* Sample Comments */}
+            <div className="space-y-4">
+              {/* We'll show some sample comments based on the project.comments count */}
+              {Array.from({ length: project.comments || 0 }).map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`p-4 rounded-lg border ${
+                    isWinner
+                      ? 'bg-black/5 border-black/10'
+                      : 'bg-zinc-900 border-zinc-800'
+                  }`}
+                >
+                  <div className="flex items-center mb-2">
+                    <div
+                      className={`w-8 h-8 rounded-full mr-2 flex items-center justify-center ${
+                        isWinner ? 'bg-black/20' : 'bg-zinc-800'
+                      }`}
+                    >
+                      <span
+                        className={`text-sm font-bold ${
+                          isWinner ? 'text-black' : 'text-white'
+                        }`}
+                      >
+                        {['A', 'B', 'C', 'D', 'E'][idx % 5]}
+                      </span>
+                    </div>
+                    <div>
+                      <div
+                        className={`text-sm font-medium ${
+                          isWinner ? 'text-black' : 'text-white'
+                        }`}
+                      >
+                        Usuario {idx + 1}
+                      </div>
+                      <div
+                        className={`text-xs ${
+                          isWinner ? 'text-black/60' : 'text-gray-400'
+                        }`}
+                      >
+                        Hace {Math.floor(Math.random() * 24)} horas
+                      </div>
+                    </div>
+                  </div>
+                  <p
+                    className={`text-sm ${
+                      isWinner ? 'text-black/80' : 'text-gray-300'
+                    }`}
+                  >
+                    {
+                      [
+                        '¡Excelente proyecto! Me encanta la idea.',
+                        'Muy buena implementación, felicitaciones al equipo.',
+                        '¿Tienen pensado agregar más funcionalidades?',
+                        'Increíble lo que lograron en tan poco tiempo.',
+                        'Me gustaría colaborar en este proyecto, ¿cómo puedo sumarme?',
+                        'La interfaz es muy intuitiva, buen trabajo.',
+                        'Estoy probándolo y funciona genial, ¡sigan así!',
+                        'Una solución muy creativa para este problema.',
+                        '¿Van a seguir desarrollándolo después del hackathon?',
+                        'Definitivamente lo voy a usar, ¡gracias por crearlo!',
+                      ][idx % 10]
+                    }
+                  </p>
+                </div>
+              ))}
+
+              {/* If no comments */}
+              {(!project.comments || project.comments === 0) && (
+                <div
+                  className={`p-4 rounded-lg border text-center ${
+                    isWinner
+                      ? 'bg-black/5 border-black/10 text-black/70'
+                      : 'bg-zinc-900 border-zinc-800 text-gray-400'
+                  }`}
+                >
+                  No hay comentarios todavía. ¡Sé el primero en comentar!
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>

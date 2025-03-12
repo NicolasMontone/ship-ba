@@ -7,11 +7,11 @@ export type Project = {
 	// New fields for Product Hunt-like design
 	description?: string;
 	spanishDescription?: string;
-	upvotes?: number;
 	tags?: string[];
-	comments?: number;
 	image?: string; // Image path
 	team?: any;
+	comments?: number; // Number of comments
+	upvotes?: number; // Number of upvotes
 }
 
 export const projectsBase: Project[] = [
@@ -28,12 +28,10 @@ export const projectsBase: Project[] = [
 		tags: ['IA', 'Streaming', 'Hackathon'],
 		image: '/projects/majorana.png',
 		team: 'Majorana',
-		upvotes: 300,
-		comments: 12
 	},
 	{
 		position: '2',
-		name: 'Burro Speach',
+		name: 'Burro Speech',
 		productUrl: 'https://burro-speech.vercel.app/',
 		videoUrl: 'https://youtu.be/bYqF2QPHnf4',
 		githubUrl: 'https://github.com/418labs/burro-speech',
@@ -41,10 +39,8 @@ export const projectsBase: Project[] = [
 			'AI-powered live translation for events, meetings or workshops',
 		spanishDescription: 'Traducción en vivo con inteligencia artificial para eventos, reuniones o talleres. ¡Habla tranqui que Burro lo traduce al toque!',
 		tags: ['IA', 'Traducción', 'Hackathon'],
-		image: '/projects/burro-speach.png',
+		image: '/projects/burro-speech.png',
 		team: 'Thousand Sunny',
-		upvotes: 250,
-		comments: 8
 	},
 	{
 		position: '3',
@@ -58,8 +54,6 @@ export const projectsBase: Project[] = [
 		tags: ['IA', 'UX', 'Feedback', 'Hackathon'],
 		image: '/projects/u0.png',
 		team: 'NoName',
-		upvotes: 200,
-		comments: 5
 	},
 
 	// Other projects (no position)
@@ -75,8 +69,6 @@ export const projectsBase: Project[] = [
 		tags: ['IA', 'Viajes', 'Planificación', 'Hackathon'],
 		image: '/projects/wololo.png',
 		team: 'Wololo',
-		upvotes: 120,
-		comments: 3
 	},
 	{
 		position: '',
@@ -89,8 +81,6 @@ export const projectsBase: Project[] = [
 		tags: ['Productividad', 'Compras', 'Hackathon'],
 		image: '/projects/tote-bag.png',
 		team: 'NNs',
-		upvotes: 95,
-		comments: 4
 	},
 	{
 		position: '',
@@ -103,8 +93,6 @@ export const projectsBase: Project[] = [
 		tags: ['Desarrollo', 'Git', 'Análisis', 'Hackathon'],
 		image: '/projects/chronocode.png',
 		team: 'campanacoding',
-		upvotes: 110,
-		comments: 7
 	},
 	{
 		position: '',
@@ -118,8 +106,6 @@ export const projectsBase: Project[] = [
 		tags: ['Salud', 'Alimentación', 'Hackathon'],
 		image: '/projects/que-comi.png',
 		team: 'OF (Only Frontends)',
-		upvotes: 85,
-		comments: 2
 	},
 	{
 		position: '',
@@ -136,8 +122,6 @@ export const projectsBase: Project[] = [
 		tags: ['IA', 'Comida', 'Hackathon'],
 		image: '/projects/sirvana-eats.png',
 		team: 'Sirvana',
-		upvotes: 100,
-		comments: 6
 	},
 	{
 		position: '',
@@ -150,8 +134,6 @@ export const projectsBase: Project[] = [
 		tags: ['IA', 'Documentación', 'Desarrollo', 'Hackathon'],
 		image: '/projects/shipa-docs.png',
 		team: 'chaco',
-		upvotes: 90,
-		comments: 4
 	},
 	{
 		position: '',
@@ -165,8 +147,6 @@ export const projectsBase: Project[] = [
 		tags: ['Finanzas', 'Análisis', 'Hackathon'],
 		image: '/projects/expense-radar.png',
 		team: 'Zeppole',
-		upvotes: 105,
-		comments: 5
 	},
 	// {
 	//   position: '',
@@ -186,8 +166,6 @@ export const projectsBase: Project[] = [
 		tags: ['IA', 'Ocio', 'Planificación', 'Hackathon'],
 		image: '/projects/gaid.png',
 		team: 'GAID',
-		upvotes: 95,
-		comments: 3
 	},
 	{
 		position: '',
@@ -201,8 +179,6 @@ export const projectsBase: Project[] = [
 		tags: ['Redes', 'Comunidad', 'Hackathon'],
 		image: '/projects/mesh-community.png',
 		team: 'Galo AI',
-		upvotes: 88,
-		comments: 4
 	},
 	// {
 	//   position: '',
@@ -230,8 +206,6 @@ export const projectsBase: Project[] = [
 		tags: ['IA', 'Presentaciones', 'Hackathon'],
 		image: '/projects/fresh-decks.png',
 		team: 'Fresh Co.',
-		upvotes: 92,
-		comments: 3
 	},
 	{
 		position: '',
@@ -245,8 +219,6 @@ export const projectsBase: Project[] = [
 		tags: ['Negocios', 'Inventario', 'Análisis', 'Hackathon'],
 		image: '/projects/ardillap.png', // Note the typo in the filename
 		team: 'stockIAte',
-		upvotes: 80,
-		comments: 2
 	},
 	{
 		position: '',
@@ -259,8 +231,6 @@ export const projectsBase: Project[] = [
 		tags: ['IA', 'Productividad', 'Documentos', 'Hackathon'],
 		image: '/projects/docs-ai.png',
 		team: 'LGH',
-		upvotes: 85,
-		comments: 3
 	},
 	// {
 	//   position: '',
@@ -280,8 +250,6 @@ export const projectsBase: Project[] = [
 		tags: ['IA', 'Educación', 'Programación', 'Hackathon'],
 		image: '/projects/coddy.png',
 		team: 'Skip Lost',
-		upvotes: 75,
-		comments: 1
 	},
 	{
 		position: '',
@@ -293,7 +261,5 @@ export const projectsBase: Project[] = [
 		tags: ['Redes', 'Comunidad', 'Hackathon'],
 		image: '/projects/introfy.png',
 		team: 'Space Motion',
-		upvotes: 78,
-		comments: 2
 	},
 ];
