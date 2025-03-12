@@ -234,9 +234,6 @@ export default function ProjectsPage() {
             <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 text-white">
               Ship BA Batch #1
             </h1>
-            <p className="text-base sm:text-lg text-gray-300 mb-6 sm:mb-8">
-              En menos de 24hs, los participantes crearon 22 proyectos.
-            </p>
           </header>
 
           <Suspense
