@@ -46,7 +46,7 @@ export const projectsBase: Project[] = [
 		position: '3',
 		name: 'U0',
 		productUrl: 'https://www.npmjs.com/package/@lndgalante/u0',
-		videoUrl: '-',
+		videoUrl: 'https://www.youtube.com/watch?v=m6SeEMFVILE',
 		githubUrl: 'https://github.com/lndgalante/last-minute-shipba',
 		description:
 			'Generate user personas to get feedback on your product with AI',
