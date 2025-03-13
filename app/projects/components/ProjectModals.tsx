@@ -103,9 +103,7 @@ export default function ProjectModals() {
     // @ts-ignore
     window.projectModals = {
       openVideoModal,
-      closeVideoModal,
       openImageModal,
-      closeImageModal,
     };
 
     return () => {

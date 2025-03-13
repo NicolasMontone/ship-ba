@@ -6,6 +6,8 @@ import { getUpvotesForAllProjects } from './actions';
 import ProjectCard from './components/ProjectCard';
 import ProjectsClientWrapper from './ProjectsClientWrapper';
 
+export const dynamic = 'force-dynamic';
+
 // Function to get project image path
 function getProjectImage(name: string): string {
   // Convert project name to kebab-case for matching image filenames

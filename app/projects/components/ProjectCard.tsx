@@ -235,21 +235,6 @@ export default function ProjectCard({
                     </div>
                   </div>
                 )}
-
-              {/* Comments Button */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  openProjectDetail();
-                }}
-                className={cn(
-                  'text-xs text-gray-300 hover:text-white flex items-center hover:bg-gray-700/20 p-2 rounded-md duration-100 transition-all',
-                  project.position && 'text-black hover:text-black'
-                )}
-              >
-                <MessageSquare className="h-3 w-3 mr-1" />
-                <span>Comentarios ({project.comments})</span>
-              </button>
             </div>
           </div>
         </div>

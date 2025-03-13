@@ -3,8 +3,9 @@ import { notFound } from 'next/navigation';
 import { getProjectSlug } from '@/lib/get-projects-slug';
 import { projectsBase } from '@/lib/projects';
 import { getUpvotesForAllProjects } from '../actions';
-import ProjectDetailClient from './components/ProjectDetailClient';
+
 import teamsData from '../../../teams.json';
+import ProjectDetailClient from './components/ProjectDetailClient';
 
 // Function to find team for a project
 function findTeamForProject(projectName: string): any {
@@ -43,14 +44,16 @@ function filterTags(tags: string[] | undefined): string[] {
   return tags.filter((tag) => tag !== 'IA');
 }
 
+export const dynamic = 'force-dynamic';
+
 // Server component that fetches data and passes it to the client component
 export default async function ProjectDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   // Get project data from the imported projects array
-  const slug = params.slug;
+  const slug = (await params)?.slug;
   const foundProject = projectsBase.find(
     (p) => getProjectSlug(p.name) === slug
   );

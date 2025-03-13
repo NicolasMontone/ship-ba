@@ -8,22 +8,35 @@ import { cookies } from 'next/headers';
 
 // Helper to get or create a user ID from cookies
 async function getUserId() {
-	const cookieStore = cookies();
-	let userId = cookieStore.get('userId')?.value;
+	try {
+		// Get the cookie store - cookies() returns the store directly, not a promise
+		const cookieStore = await cookies();
+		let userId = cookieStore.get('userId')?.value;
 
-	if (!userId) {
-		userId = uuidv4();
-		// Set cookie to expire in 1 year
-		cookieStore.set('userId', userId, {
-			expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
-			path: '/',
-			sameSite: 'strict',
-			httpOnly: true,
-			secure: process.env.NODE_ENV === 'production',
-		});
+		if (!userId) {
+			userId = uuidv4();
+			// Try to set cookie, but handle the case where we can't
+			try {
+				// Set the cookie
+				cookieStore.set('userId', userId, {
+					expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
+					path: '/',
+					sameSite: 'strict',
+					httpOnly: true,
+					secure: process.env.NODE_ENV === 'production',
+				});
+			} catch (error) {
+				console.warn('Could not set userId cookie, using temporary ID');
+				// Just return the generated ID without setting the cookie
+			}
+		}
+
+		return userId;
+	} catch (error) {
+		// If we can't access cookies at all, return a temporary ID
+		console.warn('Could not access cookies, using temporary ID');
+		return uuidv4();
 	}
-
-	return userId;
 }
 
 // Get upvote counts for all projects
@@ -40,9 +53,15 @@ export async function getUpvotesForAllProjects() {
 		}
 
 		// Get user upvoted projects
-		const userId = await getUserId();
-		const userUpvotes = await db.select().from(upvotes).where(eq(upvotes.userId, userId));
-		const userUpvotedProjects = new Set(userUpvotes.map(upvote => upvote.projectName));
+		let userUpvotedProjects = new Set<string>();
+		try {
+			const userId = await getUserId();
+			const userUpvotes = await db.select().from(upvotes).where(eq(upvotes.userId, userId));
+			userUpvotedProjects = new Set(userUpvotes.map(upvote => upvote.projectName));
+		} catch (error) {
+			console.error('Error getting user upvotes:', error);
+			// Continue with empty user upvotes
+		}
 
 		return {
 			projectCounts,
@@ -50,7 +69,11 @@ export async function getUpvotesForAllProjects() {
 		};
 	} catch (error) {
 		console.error('Error getting upvote counts:', error);
-		throw new Error('Failed to get upvote counts');
+		// Return empty data instead of throwing
+		return {
+			projectCounts: new Map<string, number>(),
+			userUpvotedProjects: new Set<string>()
+		};
 	}
 }
 
