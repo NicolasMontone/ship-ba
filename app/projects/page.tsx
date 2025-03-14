@@ -32,6 +32,7 @@ function getProjectImage(name: string): string {
     gaid: '/projects/gaid.png',
     coddy: '/projects/coddy.png',
     introfy: '/projects/introfy.png',
+    noticiar: '/projects/noticiar.png',
   };
 
   // Return the mapped image path or a placeholder

@@ -262,4 +262,16 @@ export const projectsBase: Project[] = [
 		image: '/projects/introfy.png',
 		team: 'Space Motion',
 	},
+	{
+		position: '',
+		name: 'Noticiar',
+		productUrl: 'https://notici.ar',
+		description: 'Tiktok de noticias imparciales',
+		spanishDescription: 'Tiktok de noticias imparciales',
+		tags: ['Noticias', 'Social Media', 'Hackathon'],
+		image: '/projects/noticiar.png',
+		team: 'La Mazorca',
+		videoUrl: 'https://drive.google.com/file/d/1wMlHwjV8mPPMWCi3CDMdiXP0VDzrtaAy/view?usp=drivesdk',
+		githubUrl: '',
+	},
 ];
