@@ -19,7 +19,7 @@ export const projectsBase: Project[] = [
 	{
 		position: '1',
 		name: 'Majorana',
-		productUrl: 'https://shipba-proyect-2.vercel.app/',
+		productUrl: 'https://www.majorana.stream',
 		videoUrl: 'https://www.youtube.com/watch?v=wqrSNCqqUus',
 		githubUrl: 'https://github.com/Peibl/shipba-proyect-2',
 		description:
